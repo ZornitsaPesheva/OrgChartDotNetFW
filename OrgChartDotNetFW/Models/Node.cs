@@ -9,9 +9,9 @@ namespace OrgChartDotNetFW.Models
 {
     public class Node
     {
-        public int Id { get; set; }
-        public int? Pid { get; set; }
-        public int? Stpid { get; set; }
+        public string Id { get; set; }
+        public string Pid { get; set; }
+        public string Stpid { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public string Img { get; set; } 
@@ -25,7 +25,7 @@ namespace OrgChartDotNetFW.Models
             }
             set
             {
-                InternalTags = String.Join(",", value);
+                InternalTags = string.Join(",", value);
             }
         }
 
