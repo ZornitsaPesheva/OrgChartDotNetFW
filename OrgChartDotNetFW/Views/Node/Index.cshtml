@@ -4,60 +4,145 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Pid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stpid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Img)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InternalTags)
-        </th>
-        <th></th>
-    </tr>
+<!DOCTYPE html>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stpid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Img)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InternalTags)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrgChart</title>
+    <script src="https://balkangraph.com/js/latest/orgchart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-</table>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #tree {
+            width: 100%;
+            height: 100%;
+        }
+
+        .field_0 {
+            font-family: Impact;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="tree"></div>
+
+    <script>
+
+        var chart = new OrgChart(document.getElementById("tree"), {
+            enableDragDrop: true,
+            nodeMenu: {
+                edit: { text: "Edit" },
+                add: { text: "Add" },
+                remove: { text: "Remove" }
+            },
+            nodeBinding: {
+                field_0: "fullName"
+            }
+        });
+
+        chart.on('update', function (sender, oldNode, newNode) {
+            $.post("@Url.Action("UpdateNode")", newNode)
+                .done(function () {
+                    sender.updateNode(newNode);
+                });
+            return false;
+        });
+
+        chart.on('add', function (sender, node) {
+            node.id = 0;
+            node.pid = parseInt(node.pid);
+            node.fullName = "John Smith";
+
+            $.post("@Url.Action("AddNode")", node)
+                .done(function (response) {
+                    debugger;
+                    node.id = response.id;
+                    sender.addNode(node);
+                })
+
+            return false;
+        });
+
+        chart.on('remove', function (sender, nodeId) {
+            $.post("@Url.Action("RemoveNode")", { id: nodeId })
+                .done(function () {
+                    sender.removeNode(nodeId);
+                })
+            return true;
+        });
+
+        $.get("@Url.Action("Read")").done(function (response) {
+            chart.load(response.nodes);
+        });
+    </script>
+</body>
+</html>
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stpid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Img)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InternalTags)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stpid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Img)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InternalTags)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@

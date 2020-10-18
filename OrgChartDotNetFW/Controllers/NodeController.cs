@@ -124,5 +124,57 @@ namespace OrgChartDotNetFW.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        public JsonResult Read()
+        {
+            var nodes = db.Nodes.Select(p => new Node { Id = p.Id, Pid = p.Pid, Name = p.Name });
+            return Json(new { nodes = nodes }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public EmptyResult UpdateNode(Node model)
+        {
+            var node = db.Nodes.First(p => p.Id == model.Id);
+            node.Name = model.Name;
+            node.Pid = model.Pid;
+            db.SaveChanges();
+            return new EmptyResult();
+        }
+
+        public EmptyResult RemoveNode(string id)
+        {
+            var node = db.Nodes.First(p => p.Id == id);
+            db.Nodes.Remove(node);
+
+            string parentId = node.Pid;
+
+            var children = db.Nodes.Where(p => p.Pid == node.Id);
+            foreach (var child in children)
+            {
+                child.Pid = node.Pid;
+            }
+
+            db.SaveChanges();
+            return new EmptyResult();
+        }
+
+        public JsonResult AddNode(Node model)
+        {
+            Node node = new Node();
+            node.Name = model.Name;
+            node.Pid = model.Pid;
+            db.Nodes.Add(node);
+
+            db.SaveChanges();
+
+            return Json(new { id = node.Id }, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
