@@ -11,9 +11,9 @@ namespace OrgChartDotNetFW.DAL
     {
         protected override void Seed(OrgChartContext context)
         {
-            var nodes =new List<Node>
+            var nodes = new List<Node>
             {
-                new Node{Id="top-management", Tags=new string[]{="top-management" } },
+                new Node{Id="top-management", Tags=new string[]{"top-management" } },
                 new Node{ Id="hr-team", Pid="top-management", Tags=new string[]{"hr-team", "department"}, Name="HR department" },
                 new Node{ Id="it-team", Pid="top-management", Tags=new string[]{"it-team", "department" }, Name="IT department" },
                 new Node { Id="sales-team", Pid="top-management", Tags=new string[]{"sales-team", "department" }, Name="Sales department" },
@@ -38,8 +38,11 @@ namespace OrgChartDotNetFW.DAL
                 new Node { Id="15", Stpid="sales-team", Name="Tyler Chavez", Title="Sales Manager", Img="https=//cdn.balkan.app/shared/15.jpg" },
                 new Node { Id="16", Pid="15", Name="Raylee Allen", Title="Sales", Img="https=//cdn.balkan.app/shared/16.jpg" },
                 new Node { Id="17", Pid="15", Name="Kris Horne", Title="Sales Guru", Img="https=//cdn.balkan.app/shared/8.jpg" },
-                new Node { Id="18", Pid="top-management", Name="Leslie Mcclain", Title="Personal assistant", Img="https=//cdn.balkan.app/shared/9.jpg", Tags=new string[]{=["assistant", "menu-without-add"] }
-            }
+                new Node { Id="18", Pid="top-management", Name="Leslie Mcclain", Title="Personal assistant", Img="https=//cdn.balkan.app/shared/9.jpg", Tags=new string[]{"assistant", "menu-without-add" }}
+
+            };
+                nodes.ForEach(n => context.Nodes.Add(n));
+                context.SaveChanges();
+        }
         }
     }
-}
