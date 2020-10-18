@@ -13,14 +13,14 @@ namespace OrgChartDotNetFW.DAL
         {
             var nodes =new List<Node>
             {
-                new Node{Id="top-management", Tags=["top-management"] },
-                new Node{ Id="hr-team", Pid="top-management", Tags="hr-team", Name="HR department" },
-                new Node{ Id="it-team", Pid="top-management", Tags=["it-team", "department"], Name="IT department" },
-                new Node { Id="sales-team", Pid="top-management", Tags=["sales-team", "department"], Name="Sales department" },
+                new Node{Id="top-management", Tags=new string[]{="top-management" } },
+                new Node{ Id="hr-team", Pid="top-management", Tags=new string[]{"hr-team", "department"}, Name="HR department" },
+                new Node{ Id="it-team", Pid="top-management", Tags=new string[]{"it-team", "department" }, Name="IT department" },
+                new Node { Id="sales-team", Pid="top-management", Tags=new string[]{"sales-team", "department" }, Name="Sales department" },
 
-                new Node { Id="1", Stpid="top-management", Name="Nicky Phillips", Title="CEO", Img="https=//cdn.balkan.app/shared/1.jpg", Tags=["seo-menu"] },
-                new Node { Id="2", Pid="1", Name="Rowan Hall", Title="Shareholder (51%)", Img="https=//cdn.balkan.app/shared/2.jpg", Tags=["menu-without-add"] },
-                new Node { Id="3", Pid="1", Name="Danni Anderson", Title="Shareholder (49%)", Img="https=//cdn.balkan.app/shared/3.jpg", Tags=["menu-without-add"] },
+                new Node { Id="1", Stpid="top-management", Name="Nicky Phillips", Title="CEO", Img="https=//cdn.balkan.app/shared/1.jpg", Tags=new string[]{"seo-menu"} },
+                new Node { Id="2", Pid="1", Name="Rowan Hall", Title="Shareholder (51%)", Img="https=//cdn.balkan.app/shared/2.jpg", Tags=new string[]{"menu-without-add"} },
+                new Node { Id="3", Pid="1", Name="Danni Anderson", Title="Shareholder (49%)", Img="https=//cdn.balkan.app/shared/3.jpg", Tags=new string[]{"menu-without-add"} },
 
                 new Node { Id="4", Stpid="hr-team", Name="Jordan Harris", Title="HR Manager", Img="https=//cdn.balkan.app/shared/4.jpg" },
                 new Node { Id="5", Pid="4", Name="Emerson Adams", Title="Senior HR", Img="https=//cdn.balkan.app/shared/5.jpg" },
@@ -38,7 +38,7 @@ namespace OrgChartDotNetFW.DAL
                 new Node { Id="15", Stpid="sales-team", Name="Tyler Chavez", Title="Sales Manager", Img="https=//cdn.balkan.app/shared/15.jpg" },
                 new Node { Id="16", Pid="15", Name="Raylee Allen", Title="Sales", Img="https=//cdn.balkan.app/shared/16.jpg" },
                 new Node { Id="17", Pid="15", Name="Kris Horne", Title="Sales Guru", Img="https=//cdn.balkan.app/shared/8.jpg" },
-                new Node { Id="18", Pid="top-management", Name="Leslie Mcclain", Title="Personal assistant", Img="https=//cdn.balkan.app/shared/9.jpg", Tags=["assistant", "menu-without-add"] }
+                new Node { Id="18", Pid="top-management", Name="Leslie Mcclain", Title="Personal assistant", Img="https=//cdn.balkan.app/shared/9.jpg", Tags=new string[]{=["assistant", "menu-without-add"] }
             }
         }
     }
