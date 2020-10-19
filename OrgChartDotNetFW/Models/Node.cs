@@ -15,18 +15,18 @@ namespace OrgChartDotNetFW.Models
         //    this.Tags = new List<Tag>();
         //}
 
-        public string Id { get; set; }
-        public string Pid { get; set; }
-        public string Stpid { get; set; }
-        public string Name { get; set; }
-        public string Title { get; set; }
-        public string Img { get; set; }
+        public string id { get; set; }
+        public string pid { get; set; }
+        public string stpid { get; set; }
+        public string name { get; set; }
+        public string title { get; set; }
+        public string img { get; set; }
 
         //   public virtual IList<Tag> Tags { get; set; }
 
 
         [NotMapped]
-        public string[] Tags
+        public string[] tags
         {
             get
             {

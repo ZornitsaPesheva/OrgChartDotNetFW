@@ -133,6 +133,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010180331001_InitialCreate.cs" />
+    <Compile Include="Migrations\202010180331001_InitialCreate.designer.cs">
+      <DependentUpon>202010180331001_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010191019279_Initial.cs" />
+    <Compile Include="Migrations\202010191019279_Initial.designer.cs">
+      <DependentUpon>202010191019279_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,7 +157,14 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202010180331001_InitialCreate.resx">
+      <DependentUpon>202010180331001_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010191019279_Initial.resx">
+      <DependentUpon>202010191019279_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Chart\Index.cshtml" />

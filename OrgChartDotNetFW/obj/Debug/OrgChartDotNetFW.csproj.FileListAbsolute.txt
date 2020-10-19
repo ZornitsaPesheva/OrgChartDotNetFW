@@ -81,3 +81,6 @@ D:\Workspace\ASP.Net\OrgChartDotNetFW\OrgChartDotNetFW\obj\Debug\OrgChartDotNetF
 D:\Workspace\ASP.Net\OrgChartDotNetFW\OrgChartDotNetFW\obj\Debug\OrgChartDotNetFW.csproj.CopyComplete
 D:\Workspace\ASP.Net\OrgChartDotNetFW\OrgChartDotNetFW\obj\Debug\OrgChartDotNetFW.dll
 D:\Workspace\ASP.Net\OrgChartDotNetFW\OrgChartDotNetFW\obj\Debug\OrgChartDotNetFW.pdb
+D:\Workspace\ASP.Net\OrgChartDotNetFW\OrgChartDotNetFW\obj\Debug\OrgChartDotNetFW.Migrations.InitialCreate.resources
+D:\Workspace\ASP.Net\OrgChartDotNetFW\OrgChartDotNetFW\obj\Debug\OrgChartDotNetFW.csproj.GenerateResource.cache
+D:\Workspace\ASP.Net\OrgChartDotNetFW\OrgChartDotNetFW\obj\Debug\OrgChartDotNetFW.Migrations.Initial.resources
