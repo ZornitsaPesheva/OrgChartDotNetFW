@@ -23,6 +23,16 @@ namespace OrgChartDotNetFW.Controllers
         {
             var nodes = db.Nodes.ToList();
             return Json(nodes, JsonRequestBehavior.AllowGet);
-        }    
+        }
+
+        public JsonResult AddNode(Node model)
+        {
+
+            db.Nodes.Add(model);
+
+            db.SaveChanges();
+
+            return Json(new { id = model.id }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -8,6 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <title>Index</title>
 
     <style id="myStyles">
@@ -216,6 +217,16 @@
                 sender.editUI.show(id);
             });
 
+            chart.on('add', function (sender, node) {
+                $.post("@Url.Action("AddNode")", node)
+                    .done(function (response) {
+                        node.id = response.id;
+                        sender.addNode(node);
+                    })
+
+                return false;
+            });
+
             chart.on('drop', function (sender, draggedNodeId, droppedNodeId) {
                 var draggedNode = sender.getNode(draggedNodeId);
                 var droppedNode = sender.getNode(droppedNodeId);
@@ -291,7 +302,7 @@
             function addAssistant(nodeId) {
                 var node = chart.getNode(nodeId);
                 var data = { id: OrgChart.randomId(), pid: node.stParent.id, tags: ["assistant"] };
-                chart.addNode(data);
+                chart.addNode(data, null, true);
             }
 
 
@@ -322,7 +333,7 @@
             chart.on('init', function (sender) {
                 OrgChart.loading.hide(sender);
             });
-            
+
         };
 
     </script>
