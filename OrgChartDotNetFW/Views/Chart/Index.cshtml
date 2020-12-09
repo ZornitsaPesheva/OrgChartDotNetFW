@@ -316,6 +316,12 @@
             };
             xhttp.open("GET", "/Chart/Load", true);
             xhttp.send();
+
+            OrgChart.loading.show(chart);
+
+            chart.on('init', function (sender) {
+                OrgChart.loading.hide(sender);
+            });
             
         };
 
