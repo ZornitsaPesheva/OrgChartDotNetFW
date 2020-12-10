@@ -35,6 +35,17 @@ namespace OrgChartDotNetFW.Controllers
             return Json(new { id = model.id }, JsonRequestBehavior.AllowGet);
         }
 
+        public EmptyResult UpdateNode(Node model)
+        {
+            var node = db.Nodes.First(p => p.id == model.id);
+            node.name = model.name;
+            node.pid = model.pid;
+            node.title = model.title;
+            node.tags = model.tags;
+            db.SaveChanges();
+            return new EmptyResult();
+        }
+
         public EmptyResult RemoveNode(string id)
         {
             var node = db.Nodes.First(p => p.id == id);

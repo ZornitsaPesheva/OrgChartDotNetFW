@@ -227,6 +227,14 @@
                 return false;
             });
 
+        chart.on('update', function (sender, oldNode, newNode) {
+            $.post("@Url.Action("UpdateNode")", newNode)
+                .done(function () {
+                    sender.updateNode(newNode);
+                });
+            return false;
+        });
+
         chart.on('remove', function (sender, nodeId) {
             $.post("@Url.Action("RemoveNode")", { id: nodeId })
                 .done(function () {
