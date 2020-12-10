@@ -227,6 +227,14 @@
                 return false;
             });
 
+        chart.on('remove', function (sender, nodeId) {
+            $.post("@Url.Action("RemoveNode")", { id: nodeId })
+                .done(function () {
+                    sender.removeNode(nodeId);
+                })
+            return true;
+        });
+
             chart.on('drop', function (sender, draggedNodeId, droppedNodeId) {
                 var draggedNode = sender.getNode(draggedNodeId);
                 var droppedNode = sender.getNode(droppedNodeId);
