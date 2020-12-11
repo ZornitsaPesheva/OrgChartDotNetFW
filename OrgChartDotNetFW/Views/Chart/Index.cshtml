@@ -122,6 +122,8 @@
             OrgChart.templates.invisibleGroup.padding = [20, 0, 0, 0];
 
             var chart = new OrgChart(document.getElementById("tree"), {
+                nodeMouseClick: OrgChart.action.edit,
+
                 template: "ana",
                 enableDragDrop: true,
                 assistantSeparation: 170,
@@ -211,6 +213,26 @@
                         }
                     }
                 }
+            });
+
+
+            chart.editUI.on('imageuploaded', function (sender, file, input) {
+                var url = "@Url.Action("UploadFiles")";
+
+                var formData = new FormData();
+                formData.append("files", file);
+                $.ajax(
+                    {
+                        url: url,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        type: "POST",
+                        success: function (data) {
+                            input.value = data.url;
+                            alert("Files Uploaded!");
+                        }
+                    });
             });
 
             chart.on("added", function (sender, id) {
