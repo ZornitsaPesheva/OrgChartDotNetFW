@@ -49,6 +49,7 @@ namespace OrgChartDotNetFW.Controllers
             var node = db.Nodes.First(p => p.id == model.id);
             node.name = model.name;
             node.pid = model.pid;
+            node.stpid = model.stpid;
             node.title = model.title;
             node.tags = model.tags;
             node.img = model.img;
