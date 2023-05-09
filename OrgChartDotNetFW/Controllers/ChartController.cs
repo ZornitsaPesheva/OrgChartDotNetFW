@@ -1,9 +1,13 @@
-﻿using OrgChartDotNetFW.DAL;
+﻿using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using OrgChartDotNetFW.DAL;
 using OrgChartDotNetFW.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,6 +16,7 @@ namespace OrgChartDotNetFW.Controllers
     public class ChartController : Controller
     {
         private OrgChartContext db = new OrgChartContext();
+
 
         // GET: Chart
         public ActionResult Index()
@@ -22,7 +27,9 @@ namespace OrgChartDotNetFW.Controllers
         [HttpGet]
         public ActionResult Load()
         {
+
             var nodes = db.Nodes.ToList();
+
             return Json(nodes, JsonRequestBehavior.AllowGet);
         }
 
@@ -36,16 +43,20 @@ namespace OrgChartDotNetFW.Controllers
             return Json(new { id = model.id }, JsonRequestBehavior.AllowGet);
         }
 
-        public EmptyResult UpdateNode(Node model)
+        public JsonResult UpdateNode(Node model)
         {
+            
             var node = db.Nodes.First(p => p.id == model.id);
             node.name = model.name;
             node.pid = model.pid;
             node.title = model.title;
             node.tags = model.tags;
             node.img = model.img;
+            node.InternalTags = model.InternalTags;
+            
             db.SaveChanges();
-            return new EmptyResult();
+            Console.WriteLine(node);
+            return Json(new { id = model.id }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -94,9 +105,11 @@ namespace OrgChartDotNetFW.Controllers
                 return Json("No files selected.");
             }
         }
-        public EmptyResult RemoveNode(string id)
+
+        [HttpPost]
+        public JsonResult RemoveNode(Node data)
         {
-            var node = db.Nodes.First(p => p.id == id);
+            var node = db.Nodes.First(p => p.id == data.id);
             db.Nodes.Remove(node);
 
             string parentId = node.pid;
@@ -108,7 +121,7 @@ namespace OrgChartDotNetFW.Controllers
             }
 
             db.SaveChanges();
-            return new EmptyResult();
+            return Json(new { id = node.id }, JsonRequestBehavior.AllowGet);
         }
     }
 }

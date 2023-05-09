@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Policy;
 using System.Web;
+using System.Xml.Linq;
 
 namespace OrgChartDotNetFW.Models
 {
@@ -14,9 +16,10 @@ namespace OrgChartDotNetFW.Models
         //{
         //    this.Tags = new List<Tag>();
         //}
-
         public string id { get; set; }
+
         public string pid { get; set; }
+
         public string stpid { get; set; }
         public string name { get; set; }
         public string title { get; set; }
