@@ -380,16 +380,10 @@
             chart.addNode({ id: OrgChart.randomId(), stpid: nodeId });
         }
 
-
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var nodes = JSON.parse(this.response);
-                chart.load(nodes);
-            }
-        };
-        xhttp.open("GET", "/Chart/Load", true);
-        xhttp.send();
+        fetch("@Url.Action("/Load")")
+        .then(response => response.json())
+        .then(data => chart.load(data))
+        .catch(error => console.error(error));
 
         OrgChart.loading.show(chart);
 
